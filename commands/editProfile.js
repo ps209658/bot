@@ -84,7 +84,7 @@ exports.run = async (client, message, args) => {
 
 exports.help = {
     name: 'editProfile',
-    aliases: ['edit', 'customization'],
+    aliases: ['edit', 'customization', 'editProfile'],
     description: 'Edit your own profile.',
     usage: ''
 };

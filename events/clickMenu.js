@@ -50,8 +50,22 @@ module.exports = async (client, menu) => {
                     break;
                 } 
                 case "profile_color": {
-                    if (ifUrl(finalInput.content)) return;
-                    if (!isHexValid(finalInput.content)) return; 
+                    if (ifUrl(finalInput.content)) {
+                        try {
+                            menu.message.channel.send(`<@${menu.clicker.user.id}>, Sorry that isn't a color`)
+                            return waitingForInput.delete();
+                        } catch (err) {
+                            console.log(err)
+                        }
+                    } 
+                    if (!isHexValid(finalInput.content)) {
+                        try {
+                            menu.message.channel.send(`<@${menu.clicker.user.id}>, Sorry that isn't a color`)
+                            return waitingForInput.delete();                        
+                        } catch (err) {
+                            console.log(err)
+                        }
+                    } 
 
                     await Calls.updateUser(userId, `customization.${cId}`, finalInput.content)
 
@@ -60,7 +74,14 @@ module.exports = async (client, menu) => {
                     break; 
                 }
                 case "profile_nickname": {
-                    if (ifUrl(finalInput.content)) return;
+                    if (ifUrl(finalInput.content)) {
+                        try {
+                            menu.message.channel.send(`<@${menu.clicker.user.id}>, Sorry that isn't a nickname`)
+                            return waitingForInput.delete();
+                        } catch (err) {
+                            console.log(err)
+                        }
+                    } 
                     await Calls.updateUser(userId, `customization.${cId}`, finalInput.content)
 
                     //Change Nickname on embed to new nick
@@ -68,7 +89,14 @@ module.exports = async (client, menu) => {
                     break;
                 }
                 case "profile_quote": {
-                    if (ifUrl(finalInput.content)) return;
+                    if (ifUrl(finalInput.content)) {
+                        try {
+                            menu.message.channel.send(`<@${menu.clicker.user.id}>, Sorry that isn't a quote`)
+                            return waitingForInput.delete();
+                        } catch (err) {
+                            console.log(err)
+                        }
+                    } 
                     console.log(finalInput.content.length )
                     if (finalInput.content.length > 20) return;
                     await Calls.updateUser(userId, `customization.${cId}`, finalInput.content)
